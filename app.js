@@ -10,7 +10,7 @@ const connection = mysql.createConnection(process.env.DATABASE_URL)
 console.log('Connected to PlanetScale!')
 
 app.get("/", (req, res) => {
-  connection.query('SELECT * FROM products', (err, results) => {
+  connection.query('SELECT * FROM todos', (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       res.status(500).send('Database Error');
