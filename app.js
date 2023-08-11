@@ -20,5 +20,18 @@ app.get("/", (req, res) => {
   });
 })
 
+app.delete("/todos/:id", (req, res) => {
+  const todoId = req.params.id;
+
+  connection.query('DELETE FROM todos WHERE id = ?', [todoId], (err, result) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Database Error');
+    } else {
+      res.status(204).send(); // No content response for successful deletion
+    }
+  });
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
