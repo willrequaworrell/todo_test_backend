@@ -46,6 +46,21 @@ app.post("/todos", (req, res) => {
     });
 });
 
+app.put("/todos/:id", (req, res) => {
+    const todoId = req.params.id;
+    const { completed } = req.body; // Get the completed value from the request body
+    
+    connection.query('UPDATE todos SET completed = ? WHERE id = ?', [completed, todoId], (err, result) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).send('Database Error');
+        } else {
+            console.log('successfully updated');
+            res.status(200).send(); // Success response for updating the todo
+        }
+    });
+});
+
 app.delete("/todos/:id", (req, res) => {
 	const todoId = req.params.id;
 
